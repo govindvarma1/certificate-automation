@@ -11,6 +11,10 @@ export const createCertificate = async (req, res, next) => {
     try {
         const { name, course, date } = req.body;
 
+        if(!name || !course || !date) {
+            return res.status(400).json({msg: "Details are missing"});
+        }
+
         const templatePath = "/home/govindvarma/Desktop/Internship_Assignments/certificate-automation/backend/controllers/template.pdf";
         const templateBytes = await fs.promises.readFile(templatePath);
         const pdfDoc = await PDFDocument.load(templateBytes);
