@@ -102,6 +102,7 @@ export default function CreateCertificate() {
                         onChange={(date) => setDate(date)}
                         className="w-full p-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300"
                         dateFormat="MM/dd/yyyy"
+                        wrapperClassName="w-full" // Add this line to set the width equal to other inputs
                     />
                 </div>
                 <button
