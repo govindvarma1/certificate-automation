@@ -6,7 +6,6 @@ import Certificate from '../models/Certificate.js';
 import { generateCertificateID } from '../utils/helpers.js';
 
 const currentDir = path.dirname(new URL(import.meta.url).pathname);
-const certificatesDir = path.join(currentDir, 'certificates');
 
 export const createCertificate = async (req, res, next) => {
     try {
@@ -73,11 +72,7 @@ export const createCertificate = async (req, res, next) => {
             color: rgb(0, 0, 0),
         });
 
-
-        await fs.promises.mkdir(certificatesDir, { recursive: true });
-        const resultPath = path.join(certificatesDir, 'certificate.pdf');
         const modifiedPdfBytes = await pdfDoc.save();
-        await fs.promises.writeFile(resultPath, modifiedPdfBytes);
         
         const link = await uploadFile(modifiedPdfBytes, name, course);
         
