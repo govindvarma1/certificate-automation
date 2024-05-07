@@ -71,7 +71,7 @@ export const createCertificate = async (req, res, next) => {
         const document = await Certificate.create({
             name: name,
             course: course,
-            date: new Date(),
+            date: date,
             link: link,
         });
         
