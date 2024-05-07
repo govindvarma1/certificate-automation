@@ -16,6 +16,10 @@ const certificateSchema = new mongoose.Schema({
     link: {
         type: String,
         required: true,
+    },
+    cert_id: {
+        type: String,
+        required: true
     }
 });
 

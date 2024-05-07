@@ -3,6 +3,7 @@ import path from 'path';
 import { PDFDocument, rgb, StandardFonts } from 'pdf-lib';
 import { uploadFile } from '../services/googleDriveService.js';
 import Certificate from '../models/Certificate.js';
+import { generateCertificateID } from '../utils/helpers.js';
 
 const currentDir = path.dirname(new URL(import.meta.url).pathname);
 const certificatesDir = path.join(currentDir, 'certificates');
@@ -14,6 +15,8 @@ export const createCertificate = async (req, res, next) => {
         if(!name || !course || !date) {
             return res.status(400).json({msg: "Details are missing"});
         }
+
+        const cert_id = generateCertificateID();
 
         const templatePath = `${currentDir}/template.pdf`;
         const templateBytes = await fs.promises.readFile(templatePath);
@@ -61,6 +64,16 @@ export const createCertificate = async (req, res, next) => {
             color: rgb(0, 0, 0),
         });
 
+        yPosition -= fontSize + 220;
+
+        page.drawText(`${cert_id}`, {
+            x: 650,
+            y: yPosition,
+            size: 14,
+            color: rgb(0, 0, 0),
+        });
+
+
         await fs.promises.mkdir(certificatesDir, { recursive: true });
         const resultPath = path.join(certificatesDir, 'certificate.pdf');
         const modifiedPdfBytes = await pdfDoc.save();
@@ -73,6 +86,7 @@ export const createCertificate = async (req, res, next) => {
             course: course,
             date: date,
             link: link,
+            cert_id: cert_id
         });
         
         res.json({ msg: "Certificate created", data: document });
@@ -88,6 +102,17 @@ export const fetchCertificates = async (req, res, next) => {
         const certificates = await Certificate.find();
         res.json({ msg: "certificates", certificates });
     } catch (ex) {
+        next(ex);
+    }
+}
+
+export const deleteCertificate = async (req, res, next) => {
+    try {
+        const {id} = req.params;
+        console.log(id);
+        await Certificate.findByIdAndDelete(id);
+        res.status(200).json({msg: "deleted sucessfully"})
+    } catch (error) {
         next(ex);
     }
 }
