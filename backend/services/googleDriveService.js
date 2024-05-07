@@ -1,7 +1,5 @@
-import fs from 'fs/promises'; // Use promises for cleaner async/await usage
 import { google } from 'googleapis';
 import apikeys from '../google.json' assert { type: 'json' };
-import path from 'path';
 import { Readable } from 'stream';
 
 const SCOPE = ['https://www.googleapis.com/auth/drive'];
