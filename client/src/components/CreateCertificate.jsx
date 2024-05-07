@@ -24,7 +24,7 @@ export default function CreateCertificate() {
 
         try {
             const response = await fetch(
-                `${import.meta.env.VITE_API_KEY}/certificates/create`,
+                `https://certificate-automation.onrender.com/certificates/create`,
                 {
                     method: "POST",
                     headers: {
@@ -59,11 +59,11 @@ export default function CreateCertificate() {
     return (
         <>
             <form onSubmit={handleSubmit} className="certificate-form">
-                <h2 className="text-2xl font-bold mb-4">Create Certificate</h2>
+                <h2 className="mb-4 text-2xl font-bold">Create Certificate</h2>
                 <div className="mb-6">
                     <label
                         htmlFor="name"
-                        className="block text-gray-700 font-bold mb-2">
+                        className="block mb-2 font-bold text-gray-700">
                         Name:
                     </label>
                     <input
@@ -71,14 +71,14 @@ export default function CreateCertificate() {
                         id="name"
                         value={name}
                         onChange={(e) => setName(e.target.value)}
-                        className="border rounded-md p-2 w-full focus:outline-none focus:ring focus:border-blue-300"
+                        className="w-full p-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300"
                         required
                     />
                 </div>
                 <div className="mb-6">
                     <label
                         htmlFor="courseName"
-                        className="block text-gray-700 font-bold mb-2">
+                        className="block mb-2 font-bold text-gray-700">
                         Course Name:
                     </label>
                     <input
@@ -86,21 +86,21 @@ export default function CreateCertificate() {
                         id="courseName"
                         value={courseName}
                         onChange={(e) => setCourseName(e.target.value)}
-                        className="border rounded-md p-2 w-full focus:outline-none focus:ring focus:border-blue-300"
+                        className="w-full p-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300"
                         required
                     />
                 </div>
                 <div className="mb-6">
                     <label
                         htmlFor="date"
-                        className="block text-gray-700 font-bold mb-2">
+                        className="block mb-2 font-bold text-gray-700">
                         Date:
                     </label>
                     <DatePicker
                         id="date"
                         selected={date}
                         onChange={(date) => setDate(date)}
-                        className="border rounded-md p-2 w-full focus:outline-none focus:ring focus:border-blue-300"
+                        className="w-full p-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300"
                         dateFormat="MM/dd/yyyy"
                     />
                 </div>

@@ -8,7 +8,7 @@ export default function ViewCertificates() {
   useEffect(() => {
     const fetchCertificates = async () => {
       try {
-        const response = await fetch(`${import.meta.env.VITE_API_KEY}/certificates/fetch-all`);
+        const response = await fetch(`https://certificate-automation.onrender.com/certificates/fetch-all`);
         if (response.ok) {
           const data = await response.json();
           setCertificates(data.certificates);
@@ -28,7 +28,7 @@ export default function ViewCertificates() {
 
   const handleDelete = async (id) => {
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_KEY}/certificates/delete/${id}`, {
+      const response = await fetch(`https://certificate-automation.onrender.com/certificates/delete/${id}`, {
         method: 'DELETE'
       });
       if (response.ok) {
