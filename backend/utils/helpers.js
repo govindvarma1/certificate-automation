@@ -12,5 +12,5 @@ export function generateCertificateID() {
   const id = buffer.toString('hex');
 
   // Add prefix to the ID
-  return "tete-" + id;
+  return "test-" + id;
 }
